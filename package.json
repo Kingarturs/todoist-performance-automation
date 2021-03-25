@@ -1,0 +1,27 @@
+{
+  "name": "todoist-performance-automation",
+  "version": "1.0.0",
+  "description": "Third challenge for Wizeline's QA Automation Testing Certification.",
+  "main": "index.js",
+  "scripts": {
+    "test": "artillery run --output results/report.json performance.yml && artillery report --output results/report.html results/report.json"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Kingarturs/todoist-performance-automation.git"
+  },
+  "keywords": [
+    "node",
+    "artillery"
+  ],
+  "author": "Luis Arturo García González",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/Kingarturs/todoist-performance-automation/issues"
+  },
+  "homepage": "https://github.com/Kingarturs/todoist-performance-automation#readme",
+  "dependencies": {
+    "artillery": "^1.6.2",
+    "faker": "^5.4.0"
+  }
+}

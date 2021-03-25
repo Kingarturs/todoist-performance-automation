@@ -1,0 +1,36 @@
+config:
+  target: "https://api.todoist.com/rest/v1"
+  phases:
+    - duration: 5 # Low test rate to avoid http code 429 (Too Many Requests)
+      arrivalRate: 2
+  defaults:
+    headers:
+      Authorization: Bearer {{$processEnvironment.TOKEN}}
+      Content-type: application/json
+  processor: "./TestFunctions.js"
+scenarios:
+  - flow:
+    - function: "generateRandomData"
+    - get:
+        url: "/tasks"
+    - post:
+        url: "/tasks"
+        json:
+          content: "{{content}}"
+        capture:
+          json: "$.id"
+          as: "taskId"
+    - get:
+        url: "/tasks/{{taskId}}"
+    - post:
+        url: "/tasks/{{taskId}}"
+        json:
+          content: "{{content}} Updated"
+    - post:
+        url: "/tasks/{{taskId}}/close"
+    - post:
+        url: "/tasks/{{taskId}}/reopen"
+    - delete:
+        url: "/tasks/{{taskId}}"
+
+        
